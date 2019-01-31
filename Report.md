@@ -7,12 +7,11 @@ Bone marrow samples obtained at diagnosis were used to prepare DNA from blastic 
 Captured DNA was then subjected to illumina paired-end sequencing.
 # Method
 The workflow of genomics primary analysis will be the following:
-## 1- Cleaning the fastq files.
-Trimming the adapters and cleaning low quality bases in the reads using Trimmomatic is necessary to have better alignment in the further steps
-Tool: Trimmomatic
-## 2- QC analysis of the reads
+## 1- QC analysis of the reads and Cleaning the fastq files
 Analyse the quality of reads inorder to make the decision whether to continue the analysis of the request resequencing due to low quality reads.
-## 3- Reads mapping to the reference human genome
+I used AfterQC software (https://github.com/OpenGene/AfterQC.git)[1],that makes Automatic Filtering, Trimming, Error Removing and Quality Control statistics for fastq data,3 folders are generated(good,bad,QC), the final fastq files  that ll be used for the coming analysis are in the folder called 'good'.
+
+## 2- Reads mapping to the reference human genome
 The reads are now aligned to the human reference genome, using BWA-mem, inorder to identify the covered genomic region and the corresponding genes, further steps are needed to remove any putative errors in the mapping results. The steps are the following:
         1- Read pairs with identical start and end positions were assumed to be PCR duplicates and were removed using Picard
         2- Reads reallignment around Indels to minimize alignment errors of reads ends using GATK
