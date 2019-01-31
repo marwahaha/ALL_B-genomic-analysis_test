@@ -1,8 +1,12 @@
-Somatic mutations: variants only accumulate in the tumor or the affected tissues, and they are not transmitted from generation to generation. 
-In this project we ll be analysing DNA sequences,corresponding of regions of Chromosome (9,22) from 2 patients that were diagnosed with ALL-B. 
-Aim of work :the search for specific alterations that may be susceptible to tailored therapy
-Identify mutations caused by somatic variation that may affect proteins functions
-The workflow of genomics analysis will be the following:
+
+Childhood acute lymphoblastic leukemia (ALL) is a type of cancer in which the bone marrow makes too many immature lymphocytes caused by Somatic mutations which are genetic variants that only accumulate in the tumor or the affected tissues, and they are not transmitted from generation to generation. 
+# Aim of mini-project
+In this project we ll be analysing DNA sequences,corresponding of regions of Chromosome (9,22) from 2 patients that were diagnosed with ALL-B inorder to identify mutations caused by somatic variation that may affect proteins functions or specific alterations that may be susceptible to tailored therapy.
+# Material
+Bone marrow samples obtained at diagnosis were used to prepare DNA from blastic cells, and this DNA was further enriched for sequences corresponding 2 regions of chromosome 9 and chromosome 22, respectively, using a capture probes.
+Captured DNA was then subjected to illumina paired-end sequencing.
+# Method
+The workflow of genomics primary analysis will be the following:
 ## 1- Cleaning the fastq files.
 Trimming the adapters and cleaning low quality bases in the reads using Trimmomatic is necessary to have better alignment in the further steps
 Tool: Trimmomatic
