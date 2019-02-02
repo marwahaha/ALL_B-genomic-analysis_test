@@ -46,7 +46,7 @@ Variants were filtered based on sequence coverage and quality scores
 All variants were annotated against the Ensembldatabase.
 # Structural aberation
 Structural aberation is the alteration of the structure of the chromosome(sequence of genes or kind of genes in chromosome or no. of genes)
-FusorSV,  is a tool that use different SV caller to obtain more accurate results[2]
+FusorSV (https://github.com/TheJacksonLaboratory/SVE),  is a tool that use different SV caller to obtain more accurate results[2]
 Genomic region
 chr9:1-138,394,717
 chr22:1-50,818,468
