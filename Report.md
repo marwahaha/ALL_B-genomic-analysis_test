@@ -5,11 +5,26 @@ In this project we ll be analysing DNA sequences,corresponding of regions of Chr
 # Material
 Bone marrow samples obtained at diagnosis were used to prepare DNA from blastic cells, and this DNA was further enriched for sequences corresponding 2 regions of chromosome 9 and chromosome 22, respectively, using a capture probes.
 Captured DNA was then subjected to illumina paired-end sequencing.
-# Method
+# Method 
+##  QC analysis of the reads and Cleaning the fastq files
+Analyse the quality of reads inorder to make the decision whether to continue the analysis of the request resequencing due to low quality reads. I used AfterQC software (https://github.com/OpenGene/AfterQC.git)[1],that makes Automatic Filtering, Trimming, Error Removing and Quality Control statistics for fastq data,3 folders are generated(good,bad,QC), the final fastq files  that ll be used for the coming analysis are in the folder called 'good'.
+The quality of the reads has been further investigeted using Fastq and multqc softwares in the Galaxy platforms revealing a good quality of long reads with low % of duplicates.
 The workflow of genomics primary analysis will be the following:
-## 1- QC analysis of the reads and Cleaning the fastq files
-Analyse the quality of reads inorder to make the decision whether to continue the analysis of the request resequencing due to low quality reads.
-I used AfterQC software (https://github.com/OpenGene/AfterQC.git)[1],that makes Automatic Filtering, Trimming, Error Removing and Quality Control statistics for fastq data,3 folders are generated(good,bad,QC), the final fastq files  that ll be used for the coming analysis are in the folder called 'good'.
+
+# Galaxy platform workflow
+The Jupyter and uranus data sets has been uploaded to Galaxy from a local machine, inorder to speed up the analysis so we run once all the further analysis for both data sets, the data set has been collected into a paired collection (a list) that groups the paired reads of each patients under one file. After QC'ing we move on to map the reads using BWAmem, process the resulting BAM datasets, and visualize coverage in a genome browser.
+Mapping this collection to human genome with bwa mem produces a flat collection of BAM datasets.it s very important to set when   readgroups parameter in this step. This allows us to merge individual BAM datasets into one at the end of this analysis. Next using Picard's MarkDuplicates tool we process output of bwa mem. This step produces two files, a collection of deduplicated BAMs and a collection of duplicate metrics data produced by MarkDuplicates tool. We then filter BAM collection produced by MarkDuplicates using Filter SAM or BAM tool to retain only properly mapped reads with mapping quality above 20 and mapping only to chr9 and chr22. Finally output of the filtering step is merged with MergeSAM tool and displayed in the UCSC Genome Browser. Again, merging is only possible because we have set the readgroups during the mapping step.
+
+
+
+
+
+
+
+
+
+# Python software workflow
+
 
 ## 2- Reads mapping to the reference human genome
 The reads are now aligned to the human reference genome, using BWA-mem, inorder to identify the covered genomic region and the corresponding genes, further steps are needed to remove any putative errors in the mapping results. The steps are the following:
