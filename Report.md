@@ -47,3 +47,6 @@ All variants were annotated against the Ensembldatabase.
 # Structural aberation
 Structural aberation is the alteration of the structure of the chromosome(sequence of genes or kind of genes in chromosome or no. of genes)
 MetaSV is a tool that use different SV caller to obtain more accurate results
+Genomic region
+chr9:1-138,394,717
+chr22:1-50,818,468
