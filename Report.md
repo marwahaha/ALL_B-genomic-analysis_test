@@ -17,6 +17,8 @@ The Jupyter,uranus data sets and the  human reference genome GRCh38/hg38 from th
 To end up we need to visualize genomic coverage and the corresponding genes using the UCSC genome browser using the table browser tool in the UCSC,by selection one isoforme for each gene from GENCODE v29 database.
 
 ## 3- Somatic Structural aberation
-Structural aberation is the alteration of the structure of the chromosome(sequence of genes or kind of genes in chromosome or no. of genes)
+Structural aberation is the alteration of the structure of the chromosome(sequence of genes or kind of genes in chromosome or no. of genes).
+From the Genome Browser we visualized Database of Genomic Variants: Structural Variation parameters and CNVs and InDels where displayed either in bleu there is a gain in size relative to the reference or in red if there is a loss in size relative to the reference.
+
 FusorSV (https://github.com/TheJacksonLaboratory/SVE),  is a tool that use different SV caller to obtain more accurate results[2]
 
