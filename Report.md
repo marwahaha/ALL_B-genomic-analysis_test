@@ -7,7 +7,7 @@ Bone marrow samples obtained at diagnosis were used to prepare DNA from blastic 
 Captured DNA was then subjected to illumina paired-end sequencing.
 # Method 
 ##  QC analysis of the reads and Cleaning the fastq files using FastQC
-Analyse the quality of reads inorder to make the decision whether to continue the analysis of the request resequencing due to low quality reads. I used AfterQC software (https://github.com/OpenGene/AfterQC.git)[1],that makes Automatic Filtering, Trimming, Error Removing and Quality Control statistics for fastq data,3 folders are generated(good,bad,QC), the final fastq files  that ll be used for the coming analysis are in the folder called 'good'.
+Analyse the quality of reads inorder to make the decision whether to continue the analysis of the request resequencing due to low quality reads. I used AfterQC software (https://github.com/OpenGene/AfterQC.git),that makes Automatic Filtering, Trimming, Error Removing and Quality Control statistics for fastq data,3 folders are generated(good,bad,QC), the final fastq files  that ll be used for the coming analysis are in the folder called 'good'.
 The quality of the reads has been further investigeted using Fastq and multqc softwares in the Galaxy platforms revealing a good quality of long reads with low % of duplicates.
 The workflow of genomics primary analysis will be the following:
 
@@ -20,5 +20,5 @@ To end up we need to visualize genomic coverage and the corresponding genes usin
 Structural aberation is the alteration of the structure of the chromosome(sequence of genes or kind of genes in chromosome or no. of genes).
 From the Genome Browser we visualized Database of Genomic Variants: Structural Variation parameters and CNVs and InDels where displayed either in bleu there is a gain in size relative to the reference or in red if there is a loss in size relative to the reference.
 
-FusorSV (https://github.com/TheJacksonLaboratory/SVE),  is a tool that use different SV caller to obtain more accurate results[2]
+FusorSV (https://github.com/TheJacksonLaboratory/SVE),  is a tool that use different SV caller to obtain more accurate results
 
