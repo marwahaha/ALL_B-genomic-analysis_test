@@ -12,10 +12,25 @@ The quality of the reads has been further investigeted using Fastq and multqc so
 The workflow of genomics primary analysis will be the following:
 
 # Galaxy platform workflow
-The Jupyter,uranus data sets and the  has been uploaded to Galaxy from a local machine, inorder to speed up the analysis so we run once all the further analysis for both data sets, the data set has been collected into a paired collection (a list) that groups the paired reads of each patients under one file. After QC'ing we move on to map the reads using BWAmem, process the resulting BAM datasets, and visualize coverage in a genome browser.
-Mapping this collection to human genome with bwa mem produces a flat collection of BAM datasets.it s very important to set when   readgroups parameter in this step. This allows us to merge individual BAM datasets into one at the end of this analysis. Next using Picard's MarkDuplicates tool we process output of bwa mem. This step produces two files, a collection of deduplicated BAMs and a collection of duplicate metrics data produced by MarkDuplicates tool. We then filter BAM collection produced by MarkDuplicates using Filter SAM or BAM tool to retain only properly mapped reads with mapping quality above 20 and mapping only to chr9 and chr22. Finally output of the filtering step is merged with MergeSAM tool and displayed in the UCSC Genome Browser. Again, merging is only possible because we have set the readgroups during the mapping step.
+The Jupyter,uranus data sets and the  human reference genome GRCh38/hg38 from the UCSC genome browser (http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz) has been uploaded to Galaxy from a local machine, inorder to speed up the analysis so we run once all the further analysis for both data sets, the data set has been collected into a paired collection (a list) that groups the paired reads of each patients under one file. After QC'ing we move on to map the reads using BWAmem, process the resulting BAM datasets, and visualize coverage in a genome browser.
+Mapping this collection to human genome with bwa mem produces a flat collection of BAM datasets.it s very important to set when readgroups parameter in this step. This allows us to merge individual BAM datasets into one at the end of this analysis. Next using Picard's MarkDuplicates tool we process output of bwa mem. This step produces two files, a collection of deduplicated BAMs and a collection of duplicate metrics data produced by MarkDuplicates tool. We then filter BAM collection produced by MarkDuplicates using Filter SAM or BAM tool to retain only properly mapped reads with mapping quality above 20 and mapping only to chr9 and chr22. Finally output of the filtering step is merged with MergeSAM tool and displayed in the UCSC Genome Browser. Again, merging is only possible because we have set the readgroups during the mapping step.
 
 
+The Jupyter,uranus data sets and the  human reference genome GRCh38/hg38 from the UCSC genome browser (http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz) has been uploaded to Galaxy from a local machine. After QC'ing we move on to map the reads using BWAmem. Next using Picard's MarkDuplicates tool we process output of bwa mem. This step produces two files, a collection of deduplicated BAMs and a collection of duplicate metrics data produced by MarkDuplicates tool. Reads reallignment around Indels using Realigner target creator and Indel realigner tools from GATK is a crucial step to minimize alignment errors of reads ends
+Base quality score recalibration/recalculation based on the alignment data using GATK.Finally,we filter the recalibrated BAM file
+
+
+using Filter SAM or BAM tool to retain only properly mapped reads with mapping quality above 20 and mapping only to chr9 and chr22. Finally output of the filtering step is merged with MergeSAM tool and displayed in the UCSC Genome Browser. Again, merging is only possible because we have set the readgroups during the mapping step.
+
+
+We then filter BAM collection produced by MarkDuplicates using Filter SAM or BAM tool to retain only properly mapped reads with mapping quality above 20 and mapping only to chr9 and chr22.
+
+
+
+
+Finally output of the filtering step is merged with MergeSAM tool and displayed in the UCSC Genome Browser. Again, merging is only possible because we have set the readgroups during the mapping step.
+
+To end up we need to visualize genomic coverage and the corresponding genes using the UCSC genome browser.
 
 
 
