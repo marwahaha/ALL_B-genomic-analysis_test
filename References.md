@@ -1,6 +1,4 @@
-[1] Shifu Chen, Tanxiao Huang, Yanqing Zhou, Yue Han, Mingyan Xu and Jia Gu. AfterQC: automatic filtering, trimming, error removing and quality control for fastq data. BMC Bioinformatics 2017 18(Suppl 3):80.
-
-[2] Becker et al. FusorSV: an algorithm for optimally combining data from multiple structural variation detection methods. Genome Biology (2018) 19:38 doi.org/10.1186/s13059-018-1404-6
+Shifu Chen, Tanxiao Huang, Yanqing Zhou, Yue Han, Mingyan Xu and Jia Gu. AfterQC: automatic filtering, trimming, error removing and quality control for fastq data. BMC Bioinformatics 2017 18(Suppl 3):80.
 
 Blankenberg, D. and Coraor, N. and Von Kuster, G. and Taylor, J. and Nekrutenko, A. (2011). Integrating diverse databases into an unified analysis framework: a Galaxy approach. In Database, 2011 (0), pp. bar011–bar011. [doi:10.1093/database/bar011]
 
