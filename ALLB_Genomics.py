@@ -13,8 +13,8 @@ class BSMTBGan(object):
       #Settings parameters and paths
         self.global_Dir=global_Dir# path to home directory in the cluster or local machine
         self.results=self.global_Dir+"/Results/"#results folder
-        self.tools="/Users/sondeskalboussi/Tools"#Tools binaries in the cluster
-        self.ref_gen_Dir="/Users/sondeskalboussi/Desktop/ALL-b_pipeline/Reference/"#H37rv reference
+        self.tools="/Users/sondeskalboussi/Tools"#Tools binaries
+        self.ref_gen_Dir="/Users/sondeskalboussi/Desktop/ALL-b_pipeline/Reference/"#Hg38 reference
         self.genome=user_ref
         self.fasta=user_ref_fasta
         self.ref_genome="/Users/sondeskalboussi/Desktop/ALL-b_pipeline/Reference/"+self.genome+"/FASTA/"#fasta file of reference genome
@@ -27,15 +27,15 @@ class BSMTBGan(object):
         self.bedtools="bedtools/"
         self.bcftools=self.tools+"/bcftools-1.4/"
         self.mappers=mappers
-        self.dbSNP="/Users/sondeskalboussi/Desktop/BSATBGan_pipeline/Reference/dbSNP/dbSNP.vcf"
-        self.illumina_adapters="/Users/sondeskalboussi/Desktop/BSATBGan_pipeline/illumina_adapters.fna.fasta"
+        self.dbSNP="dbSNP/dbSNP.vcf"
+        self.illumina_adapters="illumina_adapters.fna.fasta"
         self.fastQFileData=File_table
         self.Sample=[]
         self.libraryPE={}
         self.librarySE={}
         self.valide_bam=[]#bam files validated by statistics for variant call
-    #self.spo_outp=spo_outp#spoligotyping output directory is the working directory by default, if u put the full path u ll have an error message so you need to
-
+        self.Delly=self.tools+"/delly/src/delly"
+        self.Normal='path to controle sample'
 
     print 
     print
@@ -83,10 +83,8 @@ class BSMTBGan(object):
                         LB2=row[4]
                         if LB1==LB2:
                             output1=self.results+"Trimming/"+SM+"_"+ID+"_"+LB+"_"+PL+"_R1.PE_paired_trimed.fq"
-                            output2=self.results+"Trimming/"+SM+"_"+ID+"_"+LB+"_"+PL+"_R1.PE_unpaired_trimed.fq"
-                            output3=self.results+"Trimming/"+SM+"_"+ID+"_"+LB+"_"+PL+"_R2.PE_paired_trimed.fq"
-                            output4=self.results+"Trimming/"+SM+"_"+ID+"_"+LB+"_"+PL+"_R2.PE_unpaired_trimed.fq"
-                            os.system("""java -jar {}trimmomatic-0.36.jar PE -threads 4 -phred33 {} {} {} {} {} {} ILLUMINACLIP:TruSeq3-PE:2:30:10 LEADING:3 TRAILING:3 MINLEN:36""".format(self.trimmomatic,read1,read2,output1,output2,output3,output4))#change extension of trimmomatic for the cluster
+                            output2=self.results+"Trimming/"+SM+"_"+ID+"_"+LB+"_"+PL+"_R2.PE_paired_trimed.fq"
+                            os.system("""java -jar {}trimmomatic-0.36.jar PE -threads 4 -phred33 {} {} {} {} {} {} ILLUMINACLIP:TruSeq3-PE:2:30:10 LEADING:3 TRAILING:3 MINLEN:36""".format(self.trimmomatic,read1,read2,output1,output2))#change extension of trimmomatic for the cluster
     # Create a dictionary where the keys are samples ID and value is the reads ID when they are coming from more than sequencing library so later you can merge all the output for the same sample 
         for fl in os.listdir(self.results+"Trimming/"):
                 os.chdir(self.results+"Trimming/")
@@ -117,11 +115,9 @@ class BSMTBGan(object):
             LB=fl.split("_")[2]
             readGroup="@RG\\tID:"+ID+"\\tSM:"+SM+"\\tLB:"+LB+"\\tPL:"+PL
             input=os.path.join(self.results+"Trimming/",fl)
-            for map in self.mappers:# mappers is a list of mapping software name (BWA-mem and novoalign in our study)
+            for map in self.mappers:# mappers is a list of mapping software name (BWA-mem)
                     if not os.path.isdir(self.results+map+"/Alignment/Final_Bam"):
-                        os.makedirs(self.results+map+"/Alignment/Final_Bam")
-                   
-                       
+                        os.makedirs(self.results+map+"/Alignment/Final_Bam")         
                     #Mapping the PE reads
                     if "PE_paired_trimed" in input:
                         if "R1" in input:
@@ -263,7 +259,6 @@ class BSMTBGan(object):
                 new.close()
                 new1.close()
             return " Statistics are done!"
-    
     # Joint variant call SNP and indels using GATK
     def joint_variant_calling(self):
             print ("""
@@ -281,7 +276,7 @@ class BSMTBGan(object):
                 for i in self.valide_bam:
                     for fl in os.listdir(Final_Bam):
                         if i in fl:
-                            if fl.endswith("_recal_sorted.bam") or "_merged_" in fl:
+                            if fl.endswith("_recal_sorted.bam") or in fl:
                                 os.chdir(Final_Bam)
                                 input=os.path.join(Final_Bam,fl)
                                 output=os.path.join(self.results+map+"/Joint_variants/",fl.replace(".bam","_GATK_snps_indels.vcf"))
@@ -339,9 +334,42 @@ class BSMTBGan(object):
                     new.write("""{}{}{}{}{}{}{}{}""".format(fl.split("_")[0],"\t",Nbre_SNP,"\t",AV_MQ,"\t",AV_QUAL,"\n"))
             new.close()
         return "VCF statistics is done"
-                 
+    def Genotype_structural_variation_calling(self):
+        print ("""
+                  ======================================================
+                    Somatic structural_variation_calling is starting !
+                  ======================================================
+        """)                    
+        for map in self.mappers:
+            if not os.path.exists(self.results+map+"/Struc_Variants"):
+                    os.makedirs(self.results+map+"/Struc_Variants")
+            if len(os.listdir(self.results+map+"/Alignment/Final_Bam/"))== 0:
+                Final_Bam=self.results+map+"/Alignment/"
+            else:
+                Final_Bam=self.results+map+"/Alignment/Final_Bam/"
+            id=fl.split("_")[0]
+                 if fl.endswith(".vcf"):
+                     input=os.path.join(self.results+map+"/Joint_Variants",fl)
+                     output1=self.results+map+"/Joint_variants/"+id+"_raw_snps.vcf"    
+            for id in self.valide_bam:
+                for fl in os.listdir(Final_Bam):
+                    if id in fl:
+                        if fl.endswith("_recal_sorted.bam") in fl and id in os.listdir(self.Normal):
+                            os.chdir(Final_Bam)
+                            input1=os.path.join(Final_Bam,fl)
+                            input2=os.path.join(self.Normal,fl)
+                            output=self.results+map+"/Struc_Variants/"+fl.replace("_realg_sorted.bam","_SV"                          os.system("""delly call -x hg38.excl -o {}.bcf -g {} {} {}""".format(id,self.ref,output,input1,input2))#add delly
+                            os.system("""delly call -x hg38.excl -o {}.bcf -g {} {} {}""".format(id,self.ref,output,input1,input2))#somatic sv call
+                            os.system("""delly filter -f somatic -o {}.pre.bcf -s {}.tsv {}.bcf""".format(id,output,input1,id))#somatic sv prefiltering
+                            os.system(""" delly call -g hg38.fa -v {}.pre.bcf -o geno.bcf -x hg38.excl {}.bam {}.bam ... controlN.bam""".format(id,input1,input2,id))#Genotype pre-filtered somatic sites
+                            os.system("""delly filter -f somatic -o {}.somatic.bcf -s {}.tsv geno.bcf""".format(id,input1,id))#Post-filter for somatic SVs using all control samples.
+                            os.system("""bcftools view {}.bcf > {}.vcf """.format(output,output))#convert bcf to vcf
+        return "GSV is done!"        
+                 delly call -x hg19.excl -o t1.bcf -g hg19.fa tumor1.bam control1.bam
+
+
 def main():
-        pipeline=BSMTBGan("/Users/sondeskalboussi/Desktop/BSAMGan_test1","Mycobacterium_tuberculosis_h37rv","Mycobacterium_tuberculosis_h37rv.fa","/Users/sondeskalboussi/Desktop/BSAMGan_test/Fastq.csv", mappers=["BWA"])
+        pipeline=BSMTBGan("path to Pipeline","path to HG38.fa","path to Fastq.csv", mappers=["BWA"])
         try:
             #print pipeline.process_ref_genome()
             #print pipeline.trimming()
@@ -353,6 +381,8 @@ def main():
             #print pipeline.joint_variant_calling()
             #print pipeline.joint_variant_calling_hard_filtering()
             #print pipeline.SNP_statistics()
+            #print pipeline.Genotype_structural_variation_calling()
+
         except IOError as e:
             print("I/O error: {0}".format(e))    
     
