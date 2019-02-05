@@ -16,13 +16,14 @@ The workflow of genomics primary analysis will be the following:
 
 ## Galaxy platform workflow
 The Jupyter,uranus data sets and the human reference genome GRCh38/hg38 from the UCSC genome browser (http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz) has been uploaded to Galaxy from a local machine. After QC'ing we move on to map the reads using BWAmem.To check the genomic coverage of both mapped reads data sets, we used the Genome coverage tool from Bedtools software. Next using Picard's MarkDuplicates tool we process output of bwa mem. This step produces two files, a collection of deduplicated BAMs and a collection of duplicate metrics data produced by MarkDuplicates tool. Reads reallignment around Indels using Realigner target creator and Indel realigner tools from GATK is a crucial step to minimize alignment errors of reads ends.Finally the output Bam file from Indel realigner were used as input to Filter SAM or BAM tool to retain only properly mapped reads with mapping quality above 20 and mapping only to chr9 and chr22. Finally output of the filtering step is merged with MergeSAM tool and displayed in the UCSC Genome Browser. To end up we need to visualize genomic coverage and the corresponding genes using the UCSC genome browser using the table browser tool in the UCSC,by selection one isoforme for each gene from GENCODE v29 database obtaining list of canonical genes. 
+For joint variant call, i used Freebayes a variant detector designed to find small polymorphisms,SNPs, indels ,MNPs (multi-nucleotide polymorphisms), and complex events (composite insertion and substitution events) smaller than the length of a short-read sequencing alignment, the output is a vcf file withreference and alteration
 ## Genomic covered region and corresponding genes 
 chr9:12133-138286430 with 6945 one isoforme genes
 chr22:10736170-50783662 with 4615 one isoforme genes
 List of genes are stored in two files corresponding to each chromosome (please check canonical genes folder for the list of genes for details.
 ## Structural aberation
 Structural aberation is the alteration of the structure of the chromosome(sequence of genes or kind of genes in chromosome or no. of genes),it Can be divided into insertions, deletions, inversions, and translocations (either inter or intra-chromosomal). From the literature, chr22 or Ph1 is the most frequent abberation in ALLB tumor 
-From the Genome Browser we visualized Database of Genomic Variants: Structural Variation parameters and CNVs and InDels where displayed either in bleu there is a gain in size relative to the reference or in red if there is a loss in size relative to the reference.
+From the Genome Browser we visualized Database of Genomic Variants: Structural Variation parameters and CNVs and Indels where displayed either in bleu there is a gain in size relative to the reference or in red if there is a loss in size relative to the reference.
 
 FusorSV (https://github.com/TheJacksonLaboratory/SVE), is a tool that use different SV caller to obtain more accurate results
 
