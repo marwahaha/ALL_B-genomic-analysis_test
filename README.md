@@ -22,7 +22,8 @@ chr9:12133-138286430 with 6945 one isoforme genes
 chr22:10736170-50783662 with 4615 one isoforme genes
 List of genes are stored in two files corresponding to each chromosome (please check canonical genes folder for the list of genes for details.
 ## Structural aberation
-Structural aberation is the alteration of the structure of the chromosome(sequence of genes or kind of genes in chromosome or no. of genes),it Can be divided into insertions, deletions, inversions, and translocations (either inter or intra-chromosomal). From the literature, translocation between chr22 or Ph1 and chr9 is the most frequent abberation in ALLB tumor. 
+Structural aberation is the alteration of the structure of the chromosome(sequence of genes or kind of genes in chromosome or no. of genes),it Can be divided into insertions, deletions, inversions, and translocations (either inter or intra-chromosomal). From the literature, translocation between chr22 or Ph1 and chr9 is the most frequent abberation in ALLB tumor.
+Sv might be detected using many software such as: lumpy-sv,Sv2(https://github.com/dantaki/SV2) and Svtyper.
 # Comments
  
 If we want to extend the analysis protocole for bigger data set of patients, it might be agood idea to have longer sequencing reads so we can obtain better mapping matches and this ll influence complex rearrengements and oncogenes amplifications search so i might suggest to use the pacbio platform for sequencing than benchmark the results of mapping and SV call.
