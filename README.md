@@ -9,7 +9,7 @@ In this project we ll be analysing DNA sequences,corresponding of regions of Chr
 Bone marrow samples obtained at diagnosis were used to prepare DNA from blastic cells, and this DNA was further enriched for sequences corresponding 2 regions of chromosome 9 and chromosome 22, respectively, using a capture probes. Captured DNA was then subjected to illumina paired-end sequencing.
 
 # Method
-## QC analysis of the reads and Cleaning the fastq files using FastQC
+## QC analysis of the reads and Cleaning the fastq files using AFTERQC
 Analyse the quality of reads inorder to make the decision whether to continue the analysis of the request resequencing due to low quality reads. I used AfterQC software (https://github.com/OpenGene/AfterQC.git),that makes Automatic Filtering, Trimming, Error Removing and Quality Control statistics for fastq data,3 folders are generated(good,bad,QC), the final fastq files that ll be used for the coming analysis are in the folder called 'good'. The quality of the reads has been further investigeted using Fastq and multqc softwares in the Galaxy platforms revealing a good quality of long reads with low % of duplicates. We have medium length reads that are less than 200 pb with almost good sequencing quality with small duplication percentage. 
 
 ## Galaxy platform workflow
