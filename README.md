@@ -23,6 +23,7 @@ From the Genome Browser we visualized Database of Genomic Variants: Structural V
 chr9:12133-138286430 with 6945 one isoforme genes
 
 chr22:10736170-50783662 with 4615 one isoforme genes
+
 List of genes are stored in two files corresponding to each chromosome (please check canonical genes folder for the list of genes for details.
 ## Structural aberation
 Structural aberation is the alteration of the structure of the chromosome(sequence of genes or kind of genes in chromosome or no. of genes),it Can be divided into insertions, deletions, inversions, and translocations (either inter or intra-chromosomal). From the literature, translocation between chr22 or Ph1 and chr9 is the most frequent abberation in ALLB tumor.
