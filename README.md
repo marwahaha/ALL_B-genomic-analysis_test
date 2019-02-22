@@ -1,5 +1,5 @@
 # ALL_B-Project
-Genomic analysis of two DNA samples from acute lymphoblastic leukemia patients
+## Genomic analysis of two DNA samples from acute lymphoblastic leukemia patients
 Acute lymphoblastic leukemia (ALL) is a type of cancer in which the bone marrow makes too many immature lymphocytes caused by Somatic mutations which are genetic variants that only accumulate in the tumor or the affected tissues, and they are not transmitted from generation to generation.
 
 # Aim of mini-project
@@ -7,6 +7,7 @@ In this project we ll be analysing DNA sequences,corresponding of regions of Chr
 
 # Material
 Bone marrow samples obtained at diagnosis were used to prepare DNA from blastic cells, and this DNA was further enriched for sequences corresponding 2 regions of chromosome 9 and chromosome 22, respectively, using a capture probes. Captured DNA was then subjected to illumina paired-end sequencing.
+
 
 # Method
 ## QC analysis of the reads and Cleaning the fastq files using AFTERQC
