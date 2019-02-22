@@ -21,6 +21,7 @@ From the Genome Browser we visualized Database of Genomic Variants: Structural V
 
 ## Genomic covered region and corresponding genes 
 chr9:12133-138286430 with 6945 one isoforme genes
+
 chr22:10736170-50783662 with 4615 one isoforme genes
 List of genes are stored in two files corresponding to each chromosome (please check canonical genes folder for the list of genes for details.
 ## Structural aberation
