@@ -3,7 +3,7 @@
 Acute lymphoblastic leukemia (ALL) is a type of cancer in which the bone marrow makes too many immature lymphocytes caused by Somatic mutations which are genetic variants that only accumulate in the tumor or the affected tissues, and they are not transmitted from generation to generation.
 
 # Aim of mini-project
-In this project we ll be analysing DNA sequences,corresponding of regions of Chromosome (9,22) from 2 patients that were diagnosed with ALL-B inorder to identify mutations genetic aberations.
+In this project we ll be analysing DNA sequences,corresponding of regions of Chromosome (9,22) from 2 patients that were diagnosed with ALL-B inorder to identify mutations genetic aberrations.
 
 # Material
 Bone marrow samples obtained at diagnosis were used to prepare DNA from blastic cells, and this DNA was further enriched for sequences corresponding 2 regions of chromosome 9 and chromosome 22, respectively, using a capture probes. Captured DNA was then subjected to illumina paired-end sequencing.
@@ -25,12 +25,12 @@ chr9:12133-138286430 with 6945 one isoforme genes
 chr22:10736170-50783662 with 4615 one isoforme genes
 
 List of genes are stored in two files corresponding to each chromosome (please check canonical genes folder for the list of genes for details.
-## Structural aberation
-Structural aberation is the alteration of the structure of the chromosome(sequence of genes or kind of genes in chromosome or no. of genes),it Can be divided into insertions, deletions, inversions, and translocations (either inter or intra-chromosomal). From the literature, translocation between chr22 or Ph1 and chr9 is the most frequent abberation in ALLB tumor.
+## Structural aberration
+Structural aberration is the alteration of the structure of the chromosome(sequence of genes or kind of genes in chromosome or no. of genes),it Can be divided into insertions, deletions, inversions, and translocations (either inter or intra-chromosomal). From the literature, translocation between chr22 or Ph1 and chr9 is the most frequent abberation in ALLB tumor.
 Sv might be detected using many software such as: lumpy-sv,Sv2(https://github.com/dantaki/SV2) and Svtyper.
 # Comments
  
 If we want to extend the analysis protocole for bigger data set of patients, it might a be agood idea to have longer sequencing reads so we can obtain better mapping matches and this ll influence complex rearrengements and oncogenes amplifications search so i might suggest to use the pacbio platform for sequencing then benchmark the results of mapping and SV call.
-Structural aberation at the level of  chr9 and 22(gene translocation from chr9 to chr22) is a marker of tumor so it will certainly affect the protein since this mutant gene is differentially expressed in ALLB patients, this might be a confirmation of the clinical diagnosis but we can go larger and sequence the whole transcriptome of patients so we can creat kind of mapping of all the differentially expressed genes to have a clearer idea about specific genetic markers and early genetic diagnosis of the tumor. This might open new doors toward targeted genetic treatments and help the patients to avoid putative side effects of non necessary therapy.
+Structural aberration at the level of  chr9 and 22(gene translocation from chr9 to chr22) is a marker of tumor so it will certainly affect the protein since this mutant gene is differentially expressed in ALLB patients, this might be a confirmation of the clinical diagnosis but we can go larger and sequence the whole transcriptome of patients so we can creat kind of mapping of all the differentially expressed genes to have a clearer idea about specific genetic markers and early genetic diagnosis of the tumor. This might open new doors toward targeted genetic treatments and help the patients to avoid putative side effects of non necessary therapy.
 What i suggest also is providing normal or reference samples with the tumor samples, this is very important and facilitate the analysis since the major part of SV tools are based on comparing normal vs tumor. I have tried to use different tools (Delly,Pindel,Mutec2 and others) but couldnt go further.  
 Filtering out the germeline variations can provide better identification of somatic ones. 
